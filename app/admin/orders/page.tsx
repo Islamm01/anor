@@ -18,7 +18,7 @@ const TABS = [
   { label: "❌ Отменены", value: "CANCELLED" },
 ];
 
-export const STATUS_COLOR: Record<string, string> = {
+const STATUS_COLOR: Record<string, string> = {
   NEW_ORDER:          "bg-amber-50 text-amber-700 border-amber-200",
   ACCEPTED:           "bg-blue-50 text-blue-700 border-blue-200",
   PREPARING:          "bg-violet-50 text-violet-700 border-violet-200",
