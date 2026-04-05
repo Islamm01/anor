@@ -34,7 +34,7 @@ const STATUS_COLOR: Record<string, string> = {
   COMPLETED:  "bg-green-50 text-green-700 border-green-200",
 };
 
-export const STATUS_RU: Record<string, string> = {
+const STATUS_RU: Record<string, string> = {
   NEW_ORDER:          "Новый",
   ACCEPTED:           "Принят",
   PREPARING:          "Готовится",
