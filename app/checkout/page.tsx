@@ -1,5 +1,5 @@
 // app/checkout/page.tsx
-// SARV — Checkout page works for ALL users, no login required
+// Anjir — Checkout page works for ALL users, no login required
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import GuestCheckoutForm from "@/components/checkout/GuestCheckoutForm";

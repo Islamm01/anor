@@ -48,7 +48,7 @@ export default function ProductCard({
       imageUrl: product.imageUrl,
       quantity: 1,
     });
-    window.dispatchEvent(new Event("sarv:cart-updated"));
+    window.dispatchEvent(new Event("anjir:cart-updated"));
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   }

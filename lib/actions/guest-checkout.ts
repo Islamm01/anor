@@ -1,5 +1,5 @@
 // lib/actions/guest-checkout.ts
-// SARV Agro Platform — Guest Checkout (no auth required)
+// Anjir Agro Platform — Guest Checkout (no auth required)
 "use server";
 
 import { z } from "zod";
@@ -29,7 +29,7 @@ function generateOrderNumber(): string {
   const mm = String(date.getMonth() + 1).padStart(2, "0");
   const dd = String(date.getDate()).padStart(2, "0");
   const rand = Math.floor(Math.random() * 100000).toString().padStart(5, "0");
-  return `SARV-${yy}${mm}${dd}-${rand}`;
+  return `ANJIR-${yy}${mm}${dd}-${rand}`;
 }
 
 function detectOrderType(totalKg: number): "RETAIL" | "WHOLESALE" | "BULK" | "INDUSTRIAL" {
@@ -148,7 +148,7 @@ export async function placeGuestOrder(formData: FormData) {
 
     return { success: true, orderNumber: order.orderNumber, orderId: order.id };
   } catch (err) {
-    console.error("SARV guest checkout error:", err);
+    console.error("ANJIR guest checkout error:", err);
     return { error: "Ошибка создания заказа. Пожалуйста, попробуйте ещё раз." };
   }
 }

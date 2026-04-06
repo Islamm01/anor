@@ -1,5 +1,5 @@
 // lib/i18n.ts
-// SARV Agro Platform — bilingual strings (Russian / Tajik)
+// Anjir Agro Platform — bilingual strings (Russian / Tajik)
 
 export type Lang = "ru" | "tj";
 type BiLang = Record<Lang, string>;

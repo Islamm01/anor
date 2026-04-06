@@ -97,7 +97,7 @@ export async function POST(req: NextRequest) {
 
       await answerCallbackQuery(callbackQueryId, statusRu[newStatus] ?? "Статус обновлён");
     } catch (err) {
-      console.error("SARV Telegram webhook error:", err);
+      console.error("ANJIR Telegram webhook error:", err);
       await answerCallbackQuery(callbackQueryId, "⚠️ Ошибка обновления");
     }
   }

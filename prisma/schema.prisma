@@ -1,4 +1,4 @@
-// SARV Agro Platform — Prisma Schema v2.1
+// Anjir Agro Platform — Prisma Schema v2.1
 
 generator client {
   provider = "prisma-client-js"

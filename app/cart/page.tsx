@@ -1,10 +1,10 @@
 // app/cart/page.tsx
-// SARV — Cart page works for ALL users (guest + logged in)
+// ANJIR — Cart page works for ALL users (guest + logged in)
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import GuestCartClient from "@/components/cart/GuestCartClient";
 
-export const metadata = { title: "Корзина — SARV" };
+export const metadata = { title: "Корзина — Anjir" };
 
 export default function CartPage() {
   return (

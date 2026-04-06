@@ -1,10 +1,10 @@
 // app/order-success/page.tsx
-// SARV — Order confirmation page for guest orders
+// Anjir — Order confirmation page for guest orders
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
-export const metadata = { title: "Заказ принят — SARV" };
+export const metadata = { title: "Заказ принят — Anjir" };
 
 export default function OrderSuccessPage({
   searchParams,

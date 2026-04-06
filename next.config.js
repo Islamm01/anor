@@ -15,7 +15,7 @@ const nextConfig = {
         "localhost:3000",
         // Vercel preview & production domains are allowed automatically
         // Add your custom domain here when deploying, e.g.:
-        // "sarv.yourdomain.com",
+        // "anjir.yourdomain.com",
       ],
     },
   },

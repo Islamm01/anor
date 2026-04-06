@@ -23,7 +23,7 @@ export default function GuestCartClient() {
   }, []);
 
   function notifyUpdate() {
-    window.dispatchEvent(new Event("sarv:cart-updated"));
+    window.dispatchEvent(new Event("anjir:cart-updated"));
   }
 
   function changeQty(productId: string, delta: number) {

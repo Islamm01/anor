@@ -29,8 +29,8 @@ export default function Navbar({ cartCount = 0 }: { cartCount?: number }) {
   useEffect(() => {
     setGuestCount(getGuestCartCount());
     const onStorage = () => setGuestCount(getGuestCartCount());
-    window.addEventListener("sarv:cart-updated", onStorage);
-    return () => window.removeEventListener("sarv:cart-updated", onStorage);
+    window.addEventListener("anjir:cart-updated", onStorage);
+    return () => window.removeEventListener("anjir:cart-updated", onStorage);
   }, []);
 
   const isAdmin = (session?.user as any)?.role === "ADMIN";
@@ -48,21 +48,21 @@ export default function Navbar({ cartCount = 0 }: { cartCount?: number }) {
     >
       <nav className="max-w-7xl mx-auto px-5 h-[60px] flex items-center justify-between">
 
-        {/* Logo — SARV branding */}
+        {/* Logo — Anjir branding */}
         <Link href="/" className="flex items-center gap-2.5 group shrink-0">
           <div className="w-9 h-9 relative overflow-hidden rounded-xl bg-[#0a1a0e] flex items-center justify-center group-hover:scale-105 transition-transform">
             <Image
               src="/logo.png"
-              alt="SARV"
+              alt="Anjir"
               width={32}
               height={32}
               className="object-contain scale-75"
               priority
             />
           </div>
-          <div className="leading-none">
+         <div className="leading-none">
             <span className="font-black text-[17px] tracking-tight text-black leading-none block">
-              SARV
+              anjir
             </span>
             <span className="text-[9px] font-semibold text-black/35 tracking-[0.14em] uppercase leading-none block mt-0.5">
               Agro Platform

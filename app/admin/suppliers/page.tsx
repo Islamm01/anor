@@ -5,7 +5,7 @@ import { Users, Plus } from "lucide-react";
 import AddSupplierForm from "@/components/admin/AddSupplierForm";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Поставщики — SARV Admin" };
+export const metadata = { title: "Поставщики — Anjir Admin" };
 
 export default async function SuppliersPage() {
   const suppliers = await prisma.supplier.findMany({

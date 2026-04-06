@@ -72,7 +72,7 @@ export default function GuestCheckoutForm() {
         setError(result.error);
       } else {
         clearGuestCart();
-        window.dispatchEvent(new Event("sarv:cart-updated"));
+        window.dispatchEvent(new Event("anjir:cart-updated"));
         router.push(
           `/order-success?order=${result.orderNumber}`
         );

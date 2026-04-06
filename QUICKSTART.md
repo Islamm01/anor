@@ -1,8 +1,8 @@
-# SARV Agro Platform — Руководство по запуску
+# ANJIR Agro Platform — Руководство по запуску
 
-## Что такое SARV?
+## Что такое ANJIR?
 
-SARV — цифровая сельскохозяйственная торговая платформа Таджикистана (регион Сугд).
+ANJIR — цифровая сельскохозяйственная торговая платформа Таджикистана (регион Сугд).
 Соединяет фермеров, покупателей, поставщиков и курьеров в одной экосистеме.
 Языки: Русский и Таджикский.
 
@@ -20,7 +20,7 @@ node --version       # должно быть v18+
 ```bash
 brew install postgresql@16
 brew services start postgresql@16
-createdb sarv_agro
+createdb anjir_agro
 ```
 
 ---
@@ -29,8 +29,8 @@ createdb sarv_agro
 
 ### 1. Распакуйте архив
 ```bash
-unzip sarv-platform.zip
-cd sarv-platform
+unzip anjir-platform.zip
+cd anjir-platform
 ```
 
 ### 2. Создайте `.env`
@@ -40,7 +40,7 @@ cp .env.example .env
 
 | Параметр | Значение |
 |----------|----------|
-| `DATABASE_URL` | `postgresql://postgres:@localhost:5432/sarv_agro` |
+| `DATABASE_URL` | `postgresql://postgres:@localhost:5432/anjir_agro` |
 | `NEXTAUTH_SECRET` | Любая строка 32+ символа |
 | `NEXTAUTH_URL` | `http://localhost:3000` |
 | `GOOGLE_CLIENT_ID` | Из Google Cloud Console |
@@ -52,7 +52,7 @@ cp .env.example .env
 ### 3. Установка и БД
 ```bash
 npm install
-npx prisma migrate dev --name "sarv-init"
+npx prisma migrate dev --name "anjir-init"
 npx prisma db seed
 ```
 
@@ -79,7 +79,7 @@ curl -H "Authorization: Bearer ВАШ_NEXTAUTH_SECRET" \
 ## Структура сайта
 
 ```
-/ ─────────── Главная страница SARV
+/ ─────────── Главная страница ANJIR
 /catalog ──── Каталог продуктов
 /cart ──────── Корзина (без входа!)
 /checkout ──── Оформление (без входа!)
@@ -98,8 +98,8 @@ NEW_ORDER → ACCEPTED → PREPARING → READY_FOR_DELIVERY → OUT_FOR_DELIVERY
 
 ## Стать администратором
 ```bash
-psql sarv_agro -c "UPDATE \"User\" SET role='ADMIN' WHERE email='ваш@email.com';"
+psql anjir_agro -c "UPDATE \"User\" SET role='ADMIN' WHERE email='ваш@email.com';"
 ```
 
 ---
-*SARV Agro Platform | Таджикистан, Сугд | TJS*
+*ANJIR Agro Platform | Таджикистан, Сугд | TJS*

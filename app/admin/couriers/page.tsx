@@ -4,7 +4,7 @@ import { Truck } from "lucide-react";
 import AddCourierForm from "@/components/admin/AddCourierForm";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Курьеры — SARV Admin" };
+export const metadata = { title: "Курьеры — Anjir Admin" };
 
 export default async function CouriersPage() {
   const couriers = await prisma.courier.findMany({

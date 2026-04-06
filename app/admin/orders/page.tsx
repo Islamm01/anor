@@ -5,7 +5,7 @@ import Link from "next/link";
 import OrderStatusButton from "@/components/admin/OrderStatusButton";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Заказы — SARV Admin" };
+export const metadata = { title: "Заказы — Anjir Admin" };
 
 const TABS = [
   { label: "Все", value: "" },

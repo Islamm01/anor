@@ -4,7 +4,7 @@ import { formatTJS } from "@/lib/i18n";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Дашборд — SARV Admin" };
+export const metadata = { title: "Дашборд — Anjir Admin" };
 
 const STATUS_COLOR: Record<string, string> = {
   NEW_ORDER:          "bg-amber-50 text-amber-700",
@@ -122,7 +122,7 @@ export default async function AdminDashboard() {
       <div className="mb-8">
         <h1 className="text-[26px] font-black text-black tracking-tight">Дашборд</h1>
         <p className="text-[13px] text-black/35 mt-0.5">
-          SARV Agro Platform — панель управления
+          Anjir Agro Platform — панель управления
         </p>
       </div>
 

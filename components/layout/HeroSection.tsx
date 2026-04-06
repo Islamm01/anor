@@ -27,7 +27,7 @@ export default function HeroSection() {
           <div className={`transition-all duration-1000 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
             <div className="inline-flex items-center gap-2.5 mb-8 px-4 py-2 bg-[#1a472a]/8 rounded-full border border-[#1a472a]/12">
               <div className="w-4 h-4 relative overflow-hidden rounded">
-                <Image src="/logo.png" alt="SARV" width={16} height={16} className="object-contain" />
+                <Image src="/logo.png" alt="Anjir" width={16} height={16} className="object-contain" />
               </div>
               <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1a472a]">
                 {H.badge[lang]}
@@ -35,7 +35,7 @@ export default function HeroSection() {
             </div>
 
             <h1 className="leading-[0.92] tracking-[-0.03em] mb-6">
-              <span className="block font-black text-[clamp(3.5rem,10vw,7rem)] text-[#1a1a1a]">SARV</span>
+              <span className="block font-black text-[clamp(3.5rem,10vw,7rem)] text-[#1a1a1a]">Anjir</span>
               <span className="block font-black text-[clamp(2rem,5vw,3.5rem)] text-[#1a472a]">{H.title1[lang]}</span>
               <span className="block font-black text-[clamp(1.5rem,3.5vw,2.5rem)] text-[#c8a84b]">{H.title2[lang]}</span>
             </h1>
@@ -76,7 +76,7 @@ export default function HeroSection() {
                     </p>
                   </div>
                   <div className="w-10 h-10 bg-[#0a1209] rounded-xl flex items-center justify-center overflow-hidden">
-                    <Image src="/logo.png" alt="SARV" width={28} height={28} className="object-contain scale-[0.65]" />
+                    <Image src="/logo.png" alt="Anjir" width={28} height={28} className="object-contain scale-[0.65]" />
                   </div>
                 </div>
 

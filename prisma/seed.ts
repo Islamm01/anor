@@ -1,9 +1,9 @@
-// prisma/seed.ts — SARV Agro Platform seed data
+// prisma/seed.ts — Anjir Agro Platform seed data
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log("🌱 Seeding SARV Agro Platform...");
+  console.log("🌱 Seeding Anjir Agro Platform...");
 
   const cats = await Promise.all([
     prisma.category.upsert({ where:{slug:"fruits"},       update:{}, create:{nameRu:"Фрукты",    nameTj:"Мева",         slug:"fruits",       sortOrder:1} }),
@@ -51,9 +51,9 @@ async function main() {
   }
 
   console.log(`✅ ${products.length} продуктов создано`);
-  console.log("🌿 SARV Agro Platform — seed завершён!");
+  console.log("🌿 Anjir Agro Platform — seed завершён!");
   console.log("\nСледующий шаг — стать администратором:");
-  console.log('psql sarv_agro -c "UPDATE \\"User\\" SET role=\'ADMIN\' WHERE email=\'ваш@email.com\';"');
+  console.log('psql anjir_agro -c "UPDATE \\"User\\" SET role=\'ADMIN\' WHERE email=\'ваш@email.com\';"');
 }
 
 main().catch(console.error).finally(() => prisma.$disconnect());

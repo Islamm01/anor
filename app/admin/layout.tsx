@@ -47,10 +47,10 @@ export default async function AdminLayout({
         <div className="px-4 py-4 border-b border-black/8">
           <Link href="/" className="flex items-center gap-2.5 group">
             <div className="w-8 h-8 bg-[#0a1209] rounded-lg flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform">
-              <Image src="/logo.png" alt="SARV" width={28} height={28} className="object-contain scale-75" />
+              <Image src="/logo.png" alt="Anjir" width={28} height={28} className="object-contain scale-75" />
             </div>
             <div className="leading-none">
-              <span className="text-[14px] font-black text-black leading-none block">SARV</span>
+              <span className="text-[14px] font-black text-black leading-none block">Anjir</span>
               <span className="block text-[8px] text-black/30 uppercase tracking-[0.14em] mt-0.5">Admin Panel</span>
             </div>
           </Link>

@@ -1,7 +1,7 @@
 {
-  "name": "anor-platform",
+  "name": "anjir-platform",
   "version": "2.0.0",
-  "description": "ANOR — Цифровая сельскохозяйственная платформа Таджикистана",
+  "description": "ANJIR — Цифровая сельскохозяйственная платформа Таджикистана",
   "private": true,
   "scripts": {
     "dev": "next dev",

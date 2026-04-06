@@ -11,7 +11,7 @@ export interface GuestCartItem {
   quantity: number;
 }
 
-const CART_KEY = "sarv_guest_cart";
+const CART_KEY = "anjir_guest_cart";
 
 export function getGuestCart(): GuestCartItem[] {
   if (typeof window === "undefined") return [];

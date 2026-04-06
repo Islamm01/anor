@@ -13,9 +13,8 @@ const noto = NotoSans({
 });
 
 export const metadata: Metadata = {
-  title: { default: "SARV — Agro Platform", template: "%s | SARV" },
-  description: "Цифровая сельскохозяйственная платформа Таджикистана. Свежие продукты от фермеров напрямую к покупателям.",
-  icons: { icon: "/logo.png" },
+  title: { default: "Anjir — Agro Platform", template: "%s | Anjir" },
+description: "Цифровая сельскохозяйственная платформа Таджикистана. Свежие продукты от фермеров напрямую к покупателям.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

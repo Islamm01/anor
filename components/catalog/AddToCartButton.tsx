@@ -35,7 +35,7 @@ export default function AddToCartButton({
       quantity: qty,
     });
     // Notify Navbar to update cart count
-    window.dispatchEvent(new Event("sarv:cart-updated"));
+    window.dispatchEvent(new Event("anjir:cart-updated"));
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   }

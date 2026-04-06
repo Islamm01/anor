@@ -1,5 +1,5 @@
 // lib/telegram/bot.ts
-// SARV Agro Platform — Telegram Bot Integration
+// Anjir Agro Platform — Telegram Bot Integration
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN!;
 const ADMIN_CHAT_ID = process.env.TELEGRAM_ADMIN_CHAT_ID!;
@@ -52,7 +52,7 @@ function buildOrderMessage(order: TelegramOrderPayload): string {
     .join("\n");
 
   return [
-    `${emoji} <b>SARV — ${statusText.toUpperCase()}</b>`,
+    `${emoji} <b>Anjir — ${statusText.toUpperCase()}</b>`,
     ``,
     `🔢 <b>Заказ №:</b> <code>${order.orderNumber}</code>`,
     ``,
@@ -109,7 +109,7 @@ function buildInlineKeyboard(orderId: string, currentStatus: string) {
 /** Send a new order notification to the admin Telegram chat */
 export async function sendOrderNotification(order: TelegramOrderPayload): Promise<string | null> {
   if (!BOT_TOKEN || !ADMIN_CHAT_ID) {
-    console.warn("SARV Telegram: BOT_TOKEN or ADMIN_CHAT_ID not set");
+    console.warn("ANJIR Telegram: BOT_TOKEN or ADMIN_CHAT_ID not set");
     return null;
   }
 
@@ -132,10 +132,10 @@ export async function sendOrderNotification(order: TelegramOrderPayload): Promis
     if (data.ok) {
       return String(data.result.message_id);
     }
-    console.error("SARV Telegram sendMessage error:", data);
+    console.error("ANJIR Telegram sendMessage error:", data);
     return null;
   } catch (err) {
-    console.error("SARV Telegram network error:", err);
+    console.error("ANJIR Telegram network error:", err);
     return null;
   }
 }
