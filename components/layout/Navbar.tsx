@@ -54,8 +54,8 @@ export default function Navbar({ cartCount = 0 }: { cartCount?: number }) {
             <Image
               src="/logo.png"
               alt="Anjir"
-              width={32}
-              height={32}
+              width={60}
+              height={60}
               className="object-contain scale-75"
               priority
             />
