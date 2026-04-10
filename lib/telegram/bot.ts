@@ -184,11 +184,19 @@ export async function answerCallbackQuery(
 }
 
 /** Register the webhook with Telegram (call once during setup) */
+// AFTER:
 export async function setWebhook(webhookUrl: string): Promise<boolean> {
+  const secret = process.env.TELEGRAM_WEBHOOK_SECRET;
   const res = await fetch(`${BASE_URL}/setWebhook`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ url: webhookUrl, allowed_updates: ["callback_query"] }),
+    body: JSON.stringify({
+      url: webhookUrl,
+      allowed_updates: ["callback_query"],
+      // Tell Telegram to send this secret in every request header.
+      // Must match TELEGRAM_WEBHOOK_SECRET in your .env exactly.
+      ...(secret ? { secret_token: secret } : {}),
+    }),
   });
   const data = await res.json();
   return data.ok;

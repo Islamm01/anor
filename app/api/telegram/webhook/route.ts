@@ -1,18 +1,18 @@
 // app/api/telegram/webhook/route.ts
-// Handles Telegram callback_query when manager presses order status buttons
 
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { answerCallbackQuery, updateOrderMessage, TelegramOrderPayload } from "@/lib/telegram/bot";
 
-// Verify the request comes from Telegram using a secret token
 const WEBHOOK_SECRET = process.env.TELEGRAM_WEBHOOK_SECRET;
 
 export async function POST(req: NextRequest) {
-  // Optional: verify secret header
+  // Only enforce the secret check if TELEGRAM_WEBHOOK_SECRET is actually set
+  // AND the webhook was registered with that secret (via /api/telegram/setup).
   if (WEBHOOK_SECRET) {
-    const secret = req.headers.get("x-telegram-bot-api-secret-token");
-    if (secret !== WEBHOOK_SECRET) {
+    const incoming = req.headers.get("x-telegram-bot-api-secret-token");
+    if (incoming !== WEBHOOK_SECRET) {
+      console.warn("[Anjir] Webhook rejected — secret mismatch. Re-run /api/telegram/setup.");
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
   }
@@ -24,22 +24,23 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false });
   }
 
-  // Handle callback_query (button press)
   if (body.callback_query) {
-    const query = body.callback_query;
-    const callbackQueryId: string = query.id;
-    const data: string = query.data ?? "";
+    const query           = body.callback_query;
+    const callbackQueryId = query.id as string;
+    const data            = (query.data ?? "") as string;
 
-    // Expected format: "status:<orderId>:<newStatus>"
-    const [prefix, orderId, newStatus] = data.split(":");
+    // Format: "status:<orderId>:<newStatus>"
+    const parts     = data.split(":");
+    const prefix    = parts[0];
+    const orderId   = parts[1];
+    const newStatus = parts[2];
 
     if (prefix !== "status" || !orderId || !newStatus) {
-      await answerCallbackQuery(callbackQueryId, "Неверная команда");
+      await answerCallbackQuery(callbackQueryId, "⚠️ Неверный формат команды");
       return NextResponse.json({ ok: true });
     }
 
     try {
-      // Update order status in DB
       const order = await prisma.order.update({
         where: { id: orderId },
         data: {
@@ -47,41 +48,36 @@ export async function POST(req: NextRequest) {
           updatedAt: new Date(),
           ...(newStatus === "DELIVERED" ? { completedAt: new Date() } : {}),
         },
-        include: {
-          items: true,
-        },
+        include: { items: true },
       });
 
-      // Log the status change
       await prisma.orderStatusLog.create({
         data: {
-          orderId: order.id,
-          status: newStatus as any,
-          note: "Обновлено через Telegram",
+          orderId:   order.id,
+          status:    newStatus as any,
+          note:      "Обновлено через Telegram",
           createdBy: "telegram_bot",
         },
       });
 
-      // Build payload to update the Telegram message
       const payload: TelegramOrderPayload = {
-        orderId: order.id,
-        orderNumber: order.orderNumber,
-        customerName: order.customerName,
-        customerPhone: order.customerPhone,
+        orderId:         order.id,
+        orderNumber:     order.orderNumber,
+        customerName:    order.customerName,
+        customerPhone:   order.customerPhone,
         deliveryAddress: order.deliveryAddress,
-        notes: order.notes,
-        totalAmount: Number(order.totalAmount),
-        status: order.status,
+        notes:           order.notes,
+        totalAmount:     Number(order.totalAmount),
+        status:          order.status,
         items: order.items.map((i) => ({
           productName: i.productName,
-          quantity: Number(i.quantity),
-          unitPrice: Number(i.unitPrice),
-          totalPrice: Number(i.totalPrice),
-          unit: i.unit,
+          quantity:    Number(i.quantity),
+          unitPrice:   Number(i.unitPrice),
+          totalPrice:  Number(i.totalPrice),
+          unit:        i.unit,
         })),
       };
 
-      // Edit the Telegram message to reflect new status
       if (order.tgMessageId) {
         await updateOrderMessage(order.tgMessageId, payload);
       }
@@ -97,7 +93,7 @@ export async function POST(req: NextRequest) {
 
       await answerCallbackQuery(callbackQueryId, statusRu[newStatus] ?? "Статус обновлён");
     } catch (err) {
-      console.error("ANJIR Telegram webhook error:", err);
+      console.error("[Anjir] Telegram webhook error:", err);
       await answerCallbackQuery(callbackQueryId, "⚠️ Ошибка обновления");
     }
   }
