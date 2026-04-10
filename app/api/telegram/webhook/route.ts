@@ -1,22 +1,9 @@
 // app/api/telegram/webhook/route.ts
-
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { answerCallbackQuery, updateOrderMessage, TelegramOrderPayload } from "@/lib/telegram/bot";
 
-const WEBHOOK_SECRET = process.env.TELEGRAM_WEBHOOK_SECRET;
-
 export async function POST(req: NextRequest) {
-  // Only enforce the secret check if TELEGRAM_WEBHOOK_SECRET is actually set
-  // AND the webhook was registered with that secret (via /api/telegram/setup).
-  if (WEBHOOK_SECRET) {
-    const incoming = req.headers.get("x-telegram-bot-api-secret-token");
-    if (incoming !== WEBHOOK_SECRET) {
-      console.warn("[Anjir] Webhook rejected — secret mismatch. Re-run /api/telegram/setup.");
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-  }
-
   let body: any;
   try {
     body = await req.json();
@@ -24,19 +11,20 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false });
   }
 
+  // Handle callback_query (button press)
   if (body.callback_query) {
     const query           = body.callback_query;
     const callbackQueryId = query.id as string;
     const data            = (query.data ?? "") as string;
 
-    // Format: "status:<orderId>:<newStatus>"
+    // Expected format: "status:<orderId>:<newStatus>"
     const parts     = data.split(":");
     const prefix    = parts[0];
     const orderId   = parts[1];
     const newStatus = parts[2];
 
     if (prefix !== "status" || !orderId || !newStatus) {
-      await answerCallbackQuery(callbackQueryId, "⚠️ Неверный формат команды");
+      await answerCallbackQuery(callbackQueryId, "Неверная команда");
       return NextResponse.json({ ok: true });
     }
 
@@ -45,7 +33,6 @@ export async function POST(req: NextRequest) {
         where: { id: orderId },
         data: {
           status: newStatus as any,
-          updatedAt: new Date(),
           ...(newStatus === "DELIVERED" ? { completedAt: new Date() } : {}),
         },
         include: { items: true },
