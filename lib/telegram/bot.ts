@@ -195,7 +195,7 @@ export async function setWebhook(webhookUrl: string): Promise<boolean> {
       allowed_updates: ["callback_query"],
       // Tell Telegram to send this secret in every request header.
       // Must match TELEGRAM_WEBHOOK_SECRET in your .env exactly.
-      ...(secret ? { secret_token: secret } : {}),
+      secret_token: process.env.TELEGRAM_WEBHOOK_SECRET
     }),
   });
   const data = await res.json();
